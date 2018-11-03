@@ -63,6 +63,7 @@ def jpl_mars_image():
 	image = soup.find("a", class_="button fancybox")["data-fancybox-href"]
 
 	# define full url for image
+	url = "https://www.jpl.nasa.gov"
 	image_url = url + image
 
 	# Quit broswer session
