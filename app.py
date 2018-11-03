@@ -22,16 +22,23 @@ def home():
 	# return template and data
 	return render_template("index.html", mars=mars)
 
+@app.route("/scrape")
+def scrape_data():
 
-def scrape():
+	# drop existing data in mongo
+	mongo.db.collection.drop()
 
 	# Run scraped functions
-	news = scrape.latest_marts_news()
+	news = scrape.latest_mars_news()
+	image_url = scrape.jpl_mars_image()
+	mars_weather = scrape.mars_weather()
 
 	# store results in dictionary:
 	mars = {
-		"title":news.title,
-		"description":news.description
+		"title":news["title"],
+		"description":news["description"],
+		"image_url":image_url,
+		"mars_weather":mars_weather
 	}
 
 	# insert into Mongo
