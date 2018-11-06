@@ -32,13 +32,24 @@ def scrape_data():
 	news = scrape.latest_mars_news()
 	image_url = scrape.jpl_mars_image()
 	mars_weather = scrape.mars_weather()
+	mars_facts = scrape.mars_facts()
+	mars_hemispheres = scrape.mars_hemispheres()
 
 	# store results in dictionary:
 	mars = {
 		"title":news["title"],
 		"description":news["description"],
 		"image_url":image_url,
-		"mars_weather":mars_weather
+		"mars_weather":mars_weather,
+		"mars_facts":mars_facts,
+		"mars_hemi1_title":mars_hemispheres[0]["title"],
+		"mars_hemi1_img":mars_hemispheres[0]["image_url"],
+		"mars_hemi2_title":mars_hemispheres[1]["title"],
+		"mars_hemi2_img":mars_hemispheres[1]["image_url"],
+		"mars_hemi3_title":mars_hemispheres[2]["title"],
+		"mars_hemi3_img":mars_hemispheres[2]["image_url"],
+		"mars_hemi4_title":mars_hemispheres[3]["title"],
+		"mars_hemi4_img":mars_hemispheres[3]["image_url"]		
 	}
 
 	# insert into Mongo
