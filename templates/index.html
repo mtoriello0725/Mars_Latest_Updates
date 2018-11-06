@@ -2,57 +2,86 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mission To Mars</title>
-    <link rel="stylesheet" href="./mystyles.css">  
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission To Mars</title>
+<!--   <link rel="stylesheet" href="{{ url_for('static', filename='css/mars_styles.css') }}" > --> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mars_styles.css') }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
-<body>
+<body class="main_body">
 
-    <div class="container">
-        <div class="jumbotron">
-            <h1 class="row vertical-center-row">Mission To Mars</h1>
-            <p><a class="btn btn-primary btn-lg center" href="/scrape" role="button">Get the Latest on Mars</a></p>
-
-        </div>
-
-            {% for item in mars%}
-                    <div class="row">
-                        <h2 class="font-weight-bold">Latest Mars News:</h2>
-                        <h4 class="lead">{{ item.title }}<h4>
-                        <p class="small">{{ item.description }}</p>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <!-- Image title and image goes here  -->
-                            <h2 class="font-weight-bold">Featured Mars Image</h2>
-                            <a href="{{ item.image_url }}">
-                                <img class="img-fluid" title="mars_featured" src="{{ item.image_url }}">
-                            </a>                            
-                        </div>
-                        <div class="col-lg-4">
-                            <!-- Twitter feed, then mars facts -->
-                            <span class="border border-dark" style="border-style:solid;">
-                                <div class="card-body">
-                                    <h3 class="font-weight-bold">Current Weather On Mars</h3>
-                                    <h5 class="">{{ item.mars_weather }}</h5>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <!-- Hemispheres goes here -->
-                    </div>
-
-
-            {% endfor %}
+  <div class="container">
+    <div class="row jumbotron text-center">
+        <h1>Mission To Mars</h1>
+        <p><a class="btn btn-primary btn-lg -center" href="/scrape" role="button">Get the Latest on Mars</a></p>
 
     </div>
+
+    {% for item in mars%}
+        <div class="row">
+            <h2 class="font-weight-bold">Latest Mars News:</h2>
+            <h4 class="lead">{{ item.title }}<h4>
+            <p class="small">{{ item.description }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Image title and image goes here  -->
+                <h2 class="font-weight-bold">Featured Mars Image</h2>
+                <a href="{{ item.image_url }}">
+                    <img class="img-fluid img-responsive" title="mars_featured" src="{{ item.image_url }}">
+                </a>                            
+            </div>
+            <div class="col-lg-4">
+                <!-- Twitter feed, then mars facts -->
+                <span class="border border-dark">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold">Current Weather On Mars</h3>
+                        <h5 class="">{{ item.mars_weather }}</h5>
+                    </div>
+                </span>
+                <div class="row">
+                  {{ item.mars_facts|safe }}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+          <h2 class="font-weight-bold">Mars Hemispheres</h2>
+          <hr>
+          <div class="col-lg-6">
+            <a href="{{ item.mars_hemi1_img }}">
+              <img class="img-fluid img-responsive hemis" src="{{ item.mars_hemi1_img }}">
+            </a>
+            <h3 class="font-weight-bold title">{{ item.mars_hemi1_title }}</h3>
+          </div>
+          <div class="col-lg-6">
+            <a href="{{ item.mars_hemi2_img }}">
+              <img class="img-fluid img-responsive hemis" src="{{ item.mars_hemi2_img }}">
+            </a>
+            <h3 class="font-weight-bold title">{{ item.mars_hemi2_title }}</h3>            
+          </div>
+          <div class="col-lg-6">
+            <a href="{{ item.mars_hemi3_img }}">
+              <img class="img-fluid img-responsive hemis" src="{{ item.mars_hemi3_img }}">
+            </a>
+            <h3 class="font-weight-bold title">{{ item.mars_hemi3_title }}</h3>  
+          </div>
+          <div class="col-lg-6">
+            <a href="{{ item.mars_hemi4_img }}">
+              <img class="img-fluid img-responsive hemis" src="{{ item.mars_hemi4_img }}">
+            </a>
+            <h3 class="font-weight-bold title">{{ item.mars_hemi4_title }}</h3>  
+          </div>                                                                               
+        </div>
+
+
+    {% endfor %}
+
+  </div>
 
 </body>
 
