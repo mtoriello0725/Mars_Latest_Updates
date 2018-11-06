@@ -102,7 +102,7 @@ def mars_facts():
 	# clean dataframe and return to function call
 	facts_df.rename(columns={0: "parameter", 1:"value"}, inplace=True)
 	facts_df.set_index("parameter", inplace=True)
-	return facts_df
+	return facts_df.to_html(classes="table table-striped table-hover")
 
 # Finds images for each hemisphere on Mars
 # Currently not working due to too many requests.
@@ -134,8 +134,9 @@ def mars_hemispheres():
 	    soup_temp = BeautifulSoup(html_temp, "html.parser")
 	    
 	    # find image, and define image_url
+	    url = "https://astrogeology.usgs.gov"
 	    image = soup_temp.find("img", class_="wide-image")["src"]
-	    image_url = browser.url + image
+	    image_url = url + image
 	    
 	    # create dictionary of results and append to image url list
 	    product_dict = {
@@ -146,5 +147,7 @@ def mars_hemispheres():
 	    
 	    # Go back to previous page to restart the loop
 	    browser.back()
+
+	browser.quit()
 
 	return hemisphere_image_urls
